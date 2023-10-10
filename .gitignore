@@ -8,4 +8,8 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+CMakeLists.txt
+glfw3.h
+glfw3native.h
 _deps
+music.wav
