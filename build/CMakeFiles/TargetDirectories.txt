@@ -1,3 +1,0 @@
-C:/Users/Exonl/Desktop/CPP/Spaceinfarders/build/CMakeFiles/spaceinfarders.dir
-C:/Users/Exonl/Desktop/CPP/Spaceinfarders/build/CMakeFiles/edit_cache.dir
-C:/Users/Exonl/Desktop/CPP/Spaceinfarders/build/CMakeFiles/rebuild_cache.dir
