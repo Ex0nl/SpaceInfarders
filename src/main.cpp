@@ -14,7 +14,7 @@ GLFWwindow *window;
 int main()
 {
 
-    PlaySound("music.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+    PlaySound(" \music.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 
     glfwInit();
 
