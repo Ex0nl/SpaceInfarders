@@ -5,12 +5,16 @@
 #include <stdexcept>
 #include <string>
 #include <thread>
+#include <random>
+#include <windows.h>
+#include <MMSystem.h>
 
 GLFWwindow *window;
 
 int main()
 {
 
+    PlaySound("music.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 
     glfwInit();
 
@@ -21,17 +25,24 @@ int main()
 
     glfwMakeContextCurrent(window);
 
-    start:
+start:
 
     int windowWidth, windowHeigth;
+
+    int plrHP;
 
     float x = 0;
     float y = 0;
 
     float by = 0;
     float bc = 0.0;
+    float eby = 0;
+    float ebc = 0.0;
 
     float ex = 0;
+
+    int brbr;
+    int grgr;
 
     float alphaone = 1.0;
     float alphatwo = 1.0;
@@ -43,16 +54,15 @@ int main()
     int frameCount = 0;
     double lasttime = glfwGetTime();
 
-
     while (!glfwWindowShouldClose(window))
 
     {
 
-        while (glfwGetTime() < lasttime + 1.0 / 2000)
+        while (glfwGetTime() < lasttime + 1.0 / 200)
         {
             // TODO: Put the thread to sleep, yield, or simply do nothing
         }
-        lasttime += 1.0 / 2000;
+        lasttime += 1.0 / 200;
 
         // Measure speed
         double currentTime = glfwGetTime();
@@ -76,28 +86,28 @@ int main()
 
         if (glfwGetKey(window, GLFW_KEY_D))
         {
-            x += 0.1;
+            x += 1;
         }
 
         if (glfwGetKey(window, GLFW_KEY_A))
         {
-            x -= 0.1;
+            x -= 1;
         }
 
         if (glfwGetKey(window, GLFW_KEY_W))
         {
-            y += 0.1;
+            y += 1;
         }
 
         if (glfwGetKey(window, GLFW_KEY_S))
         {
-            y -= 0.1;
+            y -= 1;
         }
 
         if (glfwGetKey(window, GLFW_KEY_SPACE))
         {
             bc = 1.0;
-            by += 0.5;
+            by += 3;
         }
         else
         {
@@ -106,28 +116,60 @@ int main()
             by = 0;
         }
 
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE))
+        {
+            goto exitP;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_R))
+        {
+            x = 0;
+            y = 0;
+
+            by = 0;
+            bc = 0.0;
+
+            ex = 0;
+
+        }
+
+        srand(time(NULL));
+        brbr = rand() % 2, 1;
+        if (brbr == 1)
+        {
+            ex += 0.5;
+        }
+        else
+        {
+            ex -= 0.5;
+        }
+
+
         if (y + by >= 300 and y <= 310 and x + 25 >= ex and x <= ex + 35 and bc == 1.0)
         {
             alphaone = 0.0;
         }
-        if (y + by >= 300 and y + by <= 310 and x + 25 >= 100 + ex and x <= 135 + ex and bc == 1.0) {
+        if (y + by >= 300 and y + by <= 310 and x + 25 >= 100 + ex and x <= 135 + ex and bc == 1.0)
+        {
             alphatwo = 0.0;
         }
-        if (y + by >= 300 and y + by <= 310 and x + 25 >= 200 + ex and x <= 235 + ex and bc == 1.0) {
+        if (y + by >= 300 and y + by <= 310 and x + 25 >= 200 + ex and x <= 235 + ex and bc == 1.0)
+        {
             alphathree = 0.0;
         }
-        if (y + by >= 300 and y + by <= 310 and x + 25 >= 300 + ex and x <= 335 + ex and bc == 1.0) {
+        if (y + by >= 300 and y + by <= 310 and x + 25 >= 300 + ex and x <= 335 + ex and bc == 1.0)
+        {
             alphafour = 0.0;
         }
-        if (y + by >= 300 and y + by <= 310 and x + 25 >= 400 + ex and x <= 435 + ex and bc == 1.0) {
+        if (y + by >= 300 and y + by <= 310 and x + 25 >= 400 + ex and x <= 435 + ex and bc == 1.0)
+        {
             alphafive = 0.0;
         }
-        
+
         if (alphaone == 0.0 and alphatwo == 0.0 and alphathree == 0.0 and alphafour == 0.0 and alphafive == 0.0)
         {
             goto start;
         }
-
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -201,5 +243,8 @@ int main()
         glfwPollEvents();
     }
 
+exitP:
+
+    glfwTerminate();
     return 0;
 }
